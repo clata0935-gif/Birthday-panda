@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🎂 A Special Birthday</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#090b2d;color:white;overflow-x:hidden}
+.hero{min-height:100vh;position:relative;display:grid;place-items:center;text-align:center;overflow:hidden;
+background:radial-gradient(circle at 50% 25%,#35358f 0,#11134c 42%,#050722 100%)}
+.stars,.hearts{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;width:4px;height:4px;background:white;border-radius:50%;animation:twinkle 2s infinite alternate}
+@keyframes twinkle{to{opacity:.2;transform:scale(.4)}}
+.content{position:relative;z-index:5;padding:25px}
+.badge{display:inline-block;padding:10px 18px;border:1px solid #ff73bd;border-radius:30px;background:#ffffff12}
+h1{font-size:clamp(3rem,10vw,7rem);line-height:.9;margin:22px 0;color:#fff;text-shadow:0 0 20px #ff3f9f}
+h1 span{color:#ff67b7}
+.subtitle{font-size:clamp(1rem,3vw,1.4rem);max-width:650px;margin:auto;line-height:1.6}
+.btn{margin-top:30px;border:0;border-radius:40px;padding:16px 30px;font-size:1rem;font-weight:bold;color:white;background:linear-gradient(90deg,#ff3d9d,#8b5cff);box-shadow:0 0 25px #ff3d9d80;cursor:pointer;transition:.25s}
+.btn:hover{transform:translateY(-4px) scale(1.03)}
+.panda{position:absolute;z-index:4;bottom:7%;left:8%;width:150px;height:150px;animation:walk 9s linear infinite}
+@keyframes walk{0%{left:-180px;transform:rotate(-3deg)}45%{transform:rotate(3deg)}50%{left:45%;transform:scaleX(1)}100%{left:110%;transform:rotate(-3deg) scaleX(1)}}
+.head{position:absolute;width:115px;height:100px;left:18px;top:5px;background:#fff;border-radius:50% 50% 45% 45%;border:5px solid #111}
+.ear{position:absolute;width:35px;height:35px;background:#111;border-radius:50%;top:-12px}
+.ear.l{left:-9px}.ear.r{right:-9px}
+.eye{position:absolute;width:29px;height:39px;background:#111;border-radius:55%;top:30px}
+.eye:after{content:"";position:absolute;width:8px;height:8px;background:white;border-radius:50%;left:7px;top:6px}
+.eye.l{left:22px;transform:rotate(25deg)}.eye.r{right:22px;transform:rotate(-25deg)}
+.nose{position:absolute;width:15px;height:10px;background:#111;border-radius:50%;left:50px;top:57px}
+.mouth{position:absolute;width:28px;height:18px;border-bottom:4px solid #111;border-radius:0 0 50% 50%;left:42px;top:61px}
+.body{position:absolute;width:105px;height:80px;background:#111;border-radius:50px 50px 35px 35px;left:25px;top:88px}
+.belly{position:absolute;width:65px;height:50px;background:#fff;border-radius:50%;left:20px;top:12px}
+.arm{position:absolute;width:32px;height:55px;background:#111;border-radius:30px;top:98px;z-index:-1}
+.arm.l{left:4px;transform:rotate(30deg)}.arm.r{right:4px;transform:rotate(-30deg)}
+.heart{font-size:45px;position:absolute;left:62px;top:102px;z-index:3;animation:beat .8s infinite alternate}
+@keyframes beat{to{transform:scale(1.18)}}
+.card{max-width:900px;margin:40px auto;padding:35px 25px;border:1px solid #ff70bf55;border-radius:28px;background:#ffffff0c;backdrop-filter:blur(10px);box-shadow:0 20px 60px #0005}
+section{padding:70px 20px;background:linear-gradient(#080a29,#11133c)}
+h2{text-align:center;font-size:2.4rem;margin-bottom:25px;color:#ff7ac4}
+.message{font-size:1.15rem;line-height:1.9;text-align:center}
+.cake{font-size:100px;text-align:center;animation:float 2s ease-in-out infinite alternate}
+@keyframes float{to{transform:translateY(-12px)}}
+footer{text-align:center;padding:35px;color:#aaa}
+#surprise{display:none;text-align:center}
+#surprise.show{display:block;animation:pop .6s}
+@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.confetti{position:fixed;top:-20px;z-index:99;animation:fall 4s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.music{position:fixed;right:18px;top:18px;z-index:20;padding:12px 16px;border-radius:25px;background:#15174b;color:white;border:1px solid #ff68b7;cursor:pointer}
+.small{opacity:.7;font-size:.9rem;margin-top:15px}
+</style>
+</head>
+<body>
+
+<button class="music" id="musicBtn">🎵 Play Music</button>
+
+<div class="hero">
+  <div class="stars" id="stars"></div>
+  <div class="content">
+    <div class="badge">✨ Today is a very special day ✨</div>
+    <h1>Happy<br><span>Birthday!</span> 🎂</h1>
+    <p class="subtitle">May your day be filled with happiness, laughter, beautiful memories and all the things that make you smile. 💖</p>
+    <button class="btn" onclick="openSurprise()">🎁 Open Your Surprise</button>
+  </div>
+
+  <div class="panda" aria-label="moving panda">
+    <div class="ear l"></div><div class="ear r"></div>
+    <div class="head"><div class="eye l"></div><div class="eye r"></div><div class="nose"></div><div class="mouth"></div></div>
+    <div class="body"><div class="belly"></div></div>
+    <div class="arm l"></div><div class="arm r"></div><div class="heart">❤️</div>
+  </div>
+</div>
+
+<section>
+  <div class="card">
+    <div class="cake">🎂</div>
+    <h2>A Little Birthday Message 💌</h2>
+    <p class="message">
+      Today isn't just another day — it's a reminder of how wonderful you are.
+      Keep smiling, keep dreaming and keep being the amazing person you are.
+      May the coming year bring you countless reasons to laugh and memories
+      you'll always want to keep. 🌸✨
+    </p>
+  </div>
+
+  <div class="card" id="surprise">
+    <h2>🎉 Surprise! 🎉</h2>
+    <p class="message">You deserve all the happiness in the world! 💕<br><br>
+      Make a wish, close your eyes, and believe that something beautiful is coming your way. 🐼✨
+    </p>
+    <button class="btn" onclick="celebrate()">🎊 Celebrate!</button>
+  </div>
+</section>
+
+<footer>Made with ❤️, a little HTML, CSS & JavaScript — and lots of birthday magic 🐼</footer>
+
+<script>
+const stars=document.getElementById("stars");
+for(let i=0;i<90;i++){
+  const s=document.createElement("i"); s.className="star";
+  s.style.left=Math.random()*100+"%"; s.style.top=Math.random()*100+"%";
+  s.style.animationDelay=Math.random()*2+"s";
+  stars.appendChild(s);
+}
+function openSurprise(){
+  document.getElementById("surprise").classList.add("show");
+  document.getElementById("surprise").scrollIntoView({behavior:"smooth"});
+  celebrate();
+}
+function celebrate(){
+  for(let i=0;i<70;i++){
+    const c=document.createElement("div"); c.className="confetti";
+    c.textContent=["🎉","💖","✨","🎈","⭐","💕"][Math.floor(Math.random()*6)];
+    c.style.left=Math.random()*100+"vw";
+    c.style.fontSize=(15+Math.random()*25)+"px";
+    c.style.animationDuration=(2.5+Math.random()*2)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),5000);
+  }
+}
+
+/* Simple built-in birthday melody — no music file required */
+let audioCtx, timer, playing=false;
+const notes=[261.63,261.63,293.66,261.63,349.23,329.63,261.63,261.63,293.66,261.63,392,349.23];
+function playNote(freq,time){
+  const o=audioCtx.createOscillator(), g=audioCtx.createGain();
+  o.type="sine"; o.frequency.value=freq;
+  g.gain.setValueAtTime(.0001,time);
+  g.gain.exponentialRampToValueAtTime(.12,time+.02);
+  g.gain.exponentialRampToValueAtTime(.0001,time+.35);
+  o.connect(g);g.connect(audioCtx.destination);o.start(time);o.stop(time+.4);
+}
+document.getElementById("musicBtn").onclick=()=>{
+  if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  playing=!playing;
+  document.getElementById("musicBtn").textContent=playing?"⏸️ Pause Music":"🎵 Play Music";
+  if(playing){
+    let t=audioCtx.currentTime;
+    notes.forEach((n,i)=>playNote(n,t+i*.42));
+    timer=setInterval(()=>{let t=audioCtx.currentTime;notes.forEach((n,i)=>playNote(n,t+i*.42));},notes.length*.42*1000);
+  }else clearInterval(timer);
+};
+</script>
+</body>
+</html>
